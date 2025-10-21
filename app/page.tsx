@@ -5,9 +5,29 @@ import { Upload, FileText, Zap, Shield, Code, Brain, CheckCircle, ArrowRight } f
 import FileUploader from '@/components/FileUploader'
 import PricingCards from '@/components/PricingCards'
 import Features from '@/components/Features'
+import TrialOnboardingModal, { TrialUserData } from '@/components/TrialOnboardingModal'
 
 export default function Home() {
+  const [showOnboarding, setShowOnboarding] = useState(false)
   const [showUploader, setShowUploader] = useState(false)
+  const [trialUser, setTrialUser] = useState<TrialUserData | null>(null)
+
+  const handleStartTrial = () => {
+    // Check if user has already onboarded
+    const existingUser = localStorage.getItem('trial_user')
+    if (existingUser) {
+      setTrialUser(JSON.parse(existingUser))
+      setShowUploader(true)
+    } else {
+      setShowOnboarding(true)
+    }
+  }
+
+  const handleOnboardingComplete = (userData: TrialUserData) => {
+    setTrialUser(userData)
+    setShowOnboarding(false)
+    setShowUploader(true)
+  }
 
   return (
     <main className="min-h-screen">
@@ -23,7 +43,7 @@ export default function Home() {
             <a href="#pricing" className="text-gray-600 hover:text-primary-600 transition">Pricing</a>
             <a href="#integrations" className="text-gray-600 hover:text-primary-600 transition">Integrations</a>
             <button
-              onClick={() => setShowUploader(true)}
+              onClick={handleStartTrial}
               className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition"
             >
               Start Free Trial
@@ -36,7 +56,7 @@ export default function Home() {
       <section className="container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto animate-fade-in">
           <div className="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            10 Free Conversions - No Credit Card Required
+            14-Day Free Trial - No Credit Card Required
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Convert Bank Statements to
@@ -48,11 +68,11 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <button
-              onClick={() => setShowUploader(true)}
+              onClick={handleStartTrial}
               className="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-primary-700 transition flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
             >
               <Upload className="w-5 h-5" />
-              Convert Now - Free
+              Start 14-Day Free Trial
             </button>
             <a
               href="#features"
@@ -81,12 +101,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trial Onboarding Modal */}
+      <TrialOnboardingModal
+        isOpen={showOnboarding}
+        onComplete={handleOnboardingComplete}
+        onClose={() => setShowOnboarding(false)}
+      />
+
       {/* File Uploader Modal */}
       {showUploader && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">Upload Your Bank Statement</h2>
+              <h2 className="text-2xl font-bold text-gray-900">
+                {trialUser ? `Welcome back, ${trialUser.fullName.split(' ')[0]}!` : 'Upload Your Bank Statement'}
+              </h2>
               <button
                 onClick={() => setShowUploader(false)}
                 className="text-gray-400 hover:text-gray-600 text-2xl"

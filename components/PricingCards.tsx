@@ -6,15 +6,17 @@ const plans = [
   {
     name: 'Free Trial',
     price: '$0',
-    period: 'forever',
-    description: 'Perfect for trying out our service',
+    period: '14 days',
+    description: 'Full access to test our service',
     features: [
-      '10 conversions per month',
+      'Unlimited conversions for 14 days',
       'All output formats (CSV, Excel, JSON)',
-      'Basic AI extraction',
-      'Email support',
-      'Up to 10 pages per statement',
-      'Basic categorization'
+      'Advanced AI extraction',
+      'Priority email support',
+      'Unlimited pages per statement',
+      'Advanced categorization',
+      'API access',
+      'Webhook integrations'
     ],
     cta: 'Start Free Trial',
     popular: false
