@@ -1,13 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
+  // Vercel supports all Next.js features including API routes
   images: {
-    unoptimized: true,
+    domains: [], // Add any external image domains here
   },
-  // Uncomment and update if deploying to a subpath (e.g., https://username.github.io/repo-name/)
-  // basePath: '/claude-cloud-code',
-  // assetPrefix: '/claude-cloud-code/',
 }
 
 module.exports = nextConfig
