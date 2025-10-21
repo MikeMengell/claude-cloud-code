@@ -23,7 +23,7 @@ StatementAI is a modern, AI-powered bank statement converter that transforms PDF
 - Custom integration endpoints
 
 ### 3. Free Trial Model
-- 10 free conversions per month
+- 14-day free trial with unlimited conversions
 - No credit card required
 - Full feature access
 - Clear upgrade path
@@ -181,10 +181,11 @@ claude-cloud-code/
 
 ### Pricing Tiers
 
-1. **Free Trial**: $0/month
-   - 10 conversions/month
+1. **Free Trial**: $0
+   - 14-day trial with unlimited conversions
    - All output formats
-   - Email support
+   - Priority email support
+   - All premium features
 
 2. **Professional**: $29/month
    - 100 conversions/month

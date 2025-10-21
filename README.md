@@ -24,10 +24,10 @@ A modern, AI-powered bank statement converter with low-code platform integration
 - Custom endpoint configuration
 
 ### Free Trial
-- 10 free conversions per month
+- 14-day free trial with unlimited conversions
 - No credit card required
 - Full feature access during trial
-- Automatic monthly reset
+- All premium features included
 
 ## Getting Started
 
@@ -209,7 +209,7 @@ console.log(result.data)
 
 ## Pricing
 
-- **Free**: 10 conversions/month
+- **Free Trial**: 14-day trial with unlimited conversions
 - **Professional**: $29/month - 100 conversions
 - **Business**: $99/month - 500 conversions
 - **Enterprise**: Custom pricing - Unlimited
