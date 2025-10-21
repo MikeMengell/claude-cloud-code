@@ -1,11 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Shield, Lock, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { Shield, Lock, CheckCircle2, ArrowRight, Sparkles, X } from 'lucide-react';
 
 interface TrialOnboardingModalProps {
   isOpen: boolean;
@@ -30,6 +26,8 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
     company: '',
     useCase: '',
   });
+
+  if (!isOpen) return null;
 
   const handleInputChange = (field: keyof TrialUserData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -79,20 +77,26 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
                       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[600px]">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {step === 'welcome' && (
-          <div className="space-y-6">
-            <DialogHeader>
-              <div className="flex items-center justify-center mb-4">
-                <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <Sparkles className="h-8 w-8 text-white" />
-                </div>
+          <div className="p-8 space-y-6">
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <div className="flex items-center justify-center mb-4">
+              <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <Sparkles className="h-8 w-8 text-white" />
               </div>
-              <DialogTitle className="text-2xl text-center">
-                Welcome to Your 14-Day Free Trial!
-              </DialogTitle>
-            </DialogHeader>
+            </div>
+
+            <h2 className="text-2xl font-bold text-center text-gray-900">
+              Welcome to Your 14-Day Free Trial!
+            </h2>
 
             <div className="space-y-4 text-center">
               <p className="text-gray-600 text-lg">
@@ -102,7 +106,7 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4 space-y-3">
                 <h3 className="font-semibold text-gray-900 flex items-center justify-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
-                  What's included in your trial:
+                  What&apos;s included in your trial:
                 </h3>
                 <ul className="text-sm text-gray-700 space-y-2">
                   <li className="flex items-center justify-center gap-2">
@@ -154,73 +158,91 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
               </p>
             </div>
 
-            <Button onClick={handleContinue} className="w-full" size="lg">
+            <button
+              onClick={handleContinue}
+              className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition flex items-center justify-center gap-2"
+            >
               Continue
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         )}
 
         {step === 'details' && (
-          <div className="space-y-6">
-            <DialogHeader>
-              <DialogTitle className="text-2xl">Tell us a bit about yourself</DialogTitle>
-              <p className="text-gray-600">
+          <div className="p-8 space-y-6">
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Tell us a bit about yourself</h2>
+              <p className="text-gray-600 mt-2">
                 Help us personalize your experience and keep you updated.
               </p>
-            </DialogHeader>
+            </div>
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="fullName">
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
                   Full Name <span className="text-red-500">*</span>
-                </Label>
-                <Input
+                </label>
+                <input
                   id="fullName"
                   type="text"
                   placeholder="John Doe"
                   value={formData.fullName}
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
                   required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email Address <span className="text-red-500">*</span>
-                </Label>
-                <Input
+                </label>
+                <input
                   id="email"
                   type="email"
                   placeholder="john@company.com"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
                   required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
                 />
                 <p className="text-xs text-gray-500">
-                  We'll send your trial details and conversion receipts here
+                  We&apos;ll send your trial details and conversion receipts here
                 </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="company">Company (Optional)</Label>
-                <Input
+                <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                  Company (Optional)
+                </label>
+                <input
                   id="company"
                   type="text"
                   placeholder="Acme Inc."
                   value={formData.company}
                   onChange={(e) => handleInputChange('company', e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="useCase">What will you use StatementAI for? (Optional)</Label>
-                <Input
+                <label htmlFor="useCase" className="block text-sm font-medium text-gray-700">
+                  What will you use StatementAI for? (Optional)
+                </label>
+                <input
                   id="useCase"
                   type="text"
                   placeholder="e.g., Accounting, expense tracking, financial analysis"
                   value={formData.useCase}
                   onChange={(e) => handleInputChange('useCase', e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
                 />
               </div>
 
@@ -234,27 +256,26 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
             </div>
 
             <div className="flex gap-3">
-              <Button
-                variant="outline"
+              <button
                 onClick={() => setStep('welcome')}
-                className="flex-1"
+                className="flex-1 px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition"
               >
                 Back
-              </Button>
-              <Button
+              </button>
+              <button
                 onClick={handleContinue}
                 disabled={!isFormValid}
-                className="flex-1"
+                className="flex-1 bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 Start My Trial
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         )}
 
         {step === 'success' && (
-          <div className="space-y-6 text-center py-8">
+          <div className="p-8 space-y-6 text-center py-12">
             <div className="flex items-center justify-center mb-4">
               <div className="h-20 w-20 rounded-full bg-green-100 flex items-center justify-center">
                 <CheckCircle2 className="h-12 w-12 text-green-600" />
@@ -262,11 +283,11 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
             </div>
 
             <div className="space-y-2">
-              <DialogTitle className="text-2xl">
-                You're all set, {formData.fullName.split(' ')[0]}!
-              </DialogTitle>
+              <h2 className="text-2xl font-bold text-gray-900">
+                You&apos;re all set, {formData.fullName.split(' ')[0]}!
+              </h2>
               <p className="text-gray-600">
-                Your 14-day free trial has started. Let's convert your first statement.
+                Your 14-day free trial has started. Let&apos;s convert your first statement.
               </p>
             </div>
 
@@ -296,13 +317,16 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
               })}
             </p>
 
-            <Button onClick={handleStartTrial} className="w-full" size="lg">
+            <button
+              onClick={handleStartTrial}
+              className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition flex items-center justify-center gap-2"
+            >
               Start Converting
-              <Sparkles className="ml-2 h-4 w-4" />
-            </Button>
+              <Sparkles className="h-4 w-4" />
+            </button>
           </div>
         )}
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
