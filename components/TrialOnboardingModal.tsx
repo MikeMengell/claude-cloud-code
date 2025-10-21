@@ -102,7 +102,7 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4 space-y-3">
                 <h3 className="font-semibold text-gray-900 flex items-center justify-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
-                  What's included in your trial:
+                  What&apos;s included in your trial:
                 </h3>
                 <ul className="text-sm text-gray-700 space-y-2">
                   <li className="flex items-center justify-center gap-2">
@@ -198,7 +198,7 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
                   required
                 />
                 <p className="text-xs text-gray-500">
-                  We'll send your trial details and conversion receipts here
+                  We&apos;ll send your trial details and conversion receipts here
                 </p>
               </div>
 
@@ -263,10 +263,10 @@ export default function TrialOnboardingModal({ isOpen, onComplete, onClose }: Tr
 
             <div className="space-y-2">
               <DialogTitle className="text-2xl">
-                You're all set, {formData.fullName.split(' ')[0]}!
+                You&apos;re all set, {formData.fullName.split(' ')[0]}!
               </DialogTitle>
               <p className="text-gray-600">
-                Your 14-day free trial has started. Let's convert your first statement.
+                Your 14-day free trial has started. Let&apos;s convert your first statement.
               </p>
             </div>
 
