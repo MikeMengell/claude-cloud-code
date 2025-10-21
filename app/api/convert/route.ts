@@ -72,10 +72,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-
-// Enable body parser for file uploads
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}

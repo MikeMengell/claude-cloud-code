@@ -15,7 +15,9 @@ export function convertToCSV(statement: BankStatement): string {
     Reference: transaction.reference || ''
   }))
 
-  return Papa.unparse(rows)
+  return Papa.unparse(rows, {
+    newline: '\r\n', // Use Windows line endings for Excel compatibility
+  })
 }
 
 /**
@@ -54,7 +56,9 @@ export function convertToExcel(statement: BankStatement): string {
 
   const allRows = [...metadata, headers, ...transactions]
 
-  return Papa.unparse(allRows)
+  return Papa.unparse(allRows, {
+    newline: '\r\n', // Use Windows line endings for Excel compatibility
+  })
 }
 
 /**

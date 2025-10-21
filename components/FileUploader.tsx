@@ -103,12 +103,28 @@ export default function FileUploader({ onClose }: FileUploaderProps) {
     if (downloadUrl) {
       window.open(downloadUrl, '_blank')
     } else if (conversionResult) {
-      // Create a download for JSON format
-      const blob = new Blob([JSON.stringify(conversionResult, null, 2)], { type: 'application/json' })
+      // Determine the correct MIME type and data format
+      let blobData: string
+      let mimeType: string
+      let extension: string
+
+      if (format === 'csv' || format === 'excel') {
+        // For CSV/Excel, the data is already a properly formatted string
+        blobData = conversionResult
+        mimeType = 'text/csv;charset=utf-8;'
+        extension = 'csv'
+      } else {
+        // For JSON formats, stringify the data
+        blobData = JSON.stringify(conversionResult, null, 2)
+        mimeType = 'application/json'
+        extension = format === 'ai-optimized' ? 'json' : format
+      }
+
+      const blob = new Blob([blobData], { type: mimeType })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `statement.${format === 'ai-optimized' ? 'json' : format}`
+      a.download = `statement.${extension}`
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
