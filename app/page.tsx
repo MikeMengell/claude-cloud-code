@@ -197,33 +197,71 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Code Example */}
-          <div className="mt-8 bg-gray-900 rounded-xl p-6 shadow-lg">
-            <div className="text-sm text-gray-400 mb-2">API Example - AI-Optimized Output</div>
-            <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`{
-  "statement": {
-    "bank": "Chase Bank",
-    "account_number": "****1234",
-    "period": { "start": "2024-01-01", "end": "2024-01-31" },
-    "transactions": [
-      {
-        "date": "2024-01-15",
-        "description": "Amazon Purchase",
-        "amount": -45.99,
-        "category": "shopping",
-        "balance": 1254.01
-      }
-    ],
-    "summary": {
-      "starting_balance": 1300.00,
-      "ending_balance": 1254.01,
-      "total_credits": 0.00,
-      "total_debits": -45.99
-    }
-  }
-}`}
-            </pre>
+          {/* Integration Visual */}
+          <div className="mt-8 bg-gradient-to-br from-primary-50 to-blue-50 rounded-xl p-8 shadow-lg border border-primary-200">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Seamless Integration Flow</h3>
+              <p className="text-gray-600">From upload to your favorite tools in seconds</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+              {/* Upload Step */}
+              <div className="bg-white rounded-lg p-6 shadow-md text-center">
+                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Upload className="w-8 h-8 text-primary-600" />
+                </div>
+                <div className="font-semibold text-gray-900">Upload PDF</div>
+                <div className="text-xs text-gray-500 mt-1">Bank Statement</div>
+              </div>
+
+              {/* Arrow */}
+              <div className="hidden md:flex justify-center">
+                <ArrowRight className="w-6 h-6 text-primary-400" />
+              </div>
+
+              {/* Processing Step */}
+              <div className="bg-white rounded-lg p-6 shadow-md text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Brain className="w-8 h-8 text-blue-600" />
+                </div>
+                <div className="font-semibold text-gray-900">AI Processing</div>
+                <div className="text-xs text-gray-500 mt-1">Extract & Structure</div>
+              </div>
+
+              {/* Arrow */}
+              <div className="hidden md:flex justify-center">
+                <ArrowRight className="w-6 h-6 text-primary-400" />
+              </div>
+
+              {/* Output Step */}
+              <div className="bg-white rounded-lg p-6 shadow-md text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Code className="w-8 h-8 text-purple-600" />
+                </div>
+                <div className="font-semibold text-gray-900">Your Tools</div>
+                <div className="text-xs text-gray-500 mt-1">Zapier, Make, API</div>
+              </div>
+            </div>
+
+            {/* Integration Badges */}
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <div className="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 flex items-center gap-2">
+                <Zap className="w-4 h-4 text-yellow-500" />
+                <span className="text-sm font-medium text-gray-700">Zapier</span>
+              </div>
+              <div className="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 flex items-center gap-2">
+                <Code className="w-4 h-4 text-purple-500" />
+                <span className="text-sm font-medium text-gray-700">Make.com</span>
+              </div>
+              <div className="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 flex items-center gap-2">
+                <Brain className="w-4 h-4 text-blue-500" />
+                <span className="text-sm font-medium text-gray-700">n8n</span>
+              </div>
+              <div className="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 flex items-center gap-2">
+                <Shield className="w-4 h-4 text-green-500" />
+                <span className="text-sm font-medium text-gray-700">REST API</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
