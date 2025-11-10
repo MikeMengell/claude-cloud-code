@@ -74,3 +74,44 @@ export interface UsageStats {
   plan: 'free' | 'professional' | 'business' | 'enterprise'
   reset_date: string
 }
+
+// Cost Estimator Types
+export type ComplexityLevel = 'low' | 'medium' | 'high' | 'veryHigh'
+
+export interface Task {
+  id: string
+  name: string
+  description: string
+  complexity: ComplexityLevel
+  sizeFactor: number
+  calculatedCost: number
+}
+
+export interface Project {
+  id: string
+  name: string
+  description: string
+  tasks: Task[]
+  totalCost: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface ComplexityFactors {
+  low: number
+  medium: number
+  high: number
+  veryHigh: number
+}
+
+export interface LLMConfig {
+  provider: 'claude' | 'openai'
+  apiKey: string
+  model: string
+}
+
+export interface CostEstimatorSettings {
+  baseRate: number
+  complexityFactors: ComplexityFactors
+  llm: LLMConfig
+}
